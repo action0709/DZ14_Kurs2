@@ -1,4 +1,4 @@
-package com.pro.sky.dz14_kurs2;
+package com.pro.sky.DZ14_Kurs2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
