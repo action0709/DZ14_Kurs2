@@ -17,10 +17,10 @@ public class EmployeeService {
         Employee employee2 = new Employee("Олег", "Sidorov", 1, 30000);
         Employee employee3 = new Employee("Мария", "Sidorovа", 1, 40000);
         Employee employee4 = new Employee("Сергей", "Sidorov", 1, 50000);
-        employees.put(createKey(employee1), employee1);
-        employees.put(createKey(employee2), employee2);
-        employees.put(createKey(employee3), employee3);
-        employees.put(createKey(employee4), employee4);
+     //   employees.put(createKey(employee1), employee1);
+        //  employees.put(createKey(employee2), employee2);
+       // employees.put(createKey(employee3), employee3);
+       // employees.put(createKey(employee4), employee4);
     }
     public Collection<Employee> getAll() {
         return employees.values();
