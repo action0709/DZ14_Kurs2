@@ -51,4 +51,12 @@ void findPositive() {
         employeeService.add(employee);
         assertThrows(EmployeeNotFoundException.class, () -> employeeService.find("not_name", "not_last_name"));
     }
+
+    @Test
+    void removePositive(){
+        Employee employee = new Employee("name", "last_name", 1, 1);
+        employeeService.add(employee);
+        employeeService.remove("name", "last_name");
+        assertFalse(employeeService.getAll().contains(employee));
+    }
 }
