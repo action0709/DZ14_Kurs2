@@ -1,11 +1,10 @@
 package com.pro.sky.DZ14_Kurs2.service;
 
 
-import com.pro.sky.DZ14_Kurs2.exception.*;
+import com.pro.sky.DZ14_Kurs2.exception.EmployeeNotFoundException;
 import com.pro.sky.DZ14_Kurs2.model.Employee;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -18,16 +17,18 @@ public class DepartmentService {
     public DepartmentService(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-    public Employee getEmployeeWithMaxSalary (int department) {
+    public double getEmployeeWithMaxSalary (int department) {
         return employeeService.getAll().stream()
                 .filter(employee -> employee.getDepartment() == department)
-                .max(Comparator.comparingDouble(Employee::getSalary))
+                .mapToDouble(Employee::getSalary)
+                .max()
                 .orElseThrow(EmployeeNotFoundException::new);
     }
-    public Employee getEmployeeWithMinSalary (int department) {
+    public double getEmployeeWithMinSalary (int department) {
         return employeeService.getAll().stream()
                 .filter(employee -> employee.getDepartment() == department)
-                .min(Comparator.comparingDouble(Employee::getSalary))
+                .mapToDouble(Employee::getSalary)
+                .min()
                 .orElseThrow(EmployeeNotFoundException::new);
     }
 
@@ -42,9 +43,9 @@ public class DepartmentService {
         return employeeService.getAll().stream()
                 .collect(Collectors.groupingBy(Employee::getDepartment));
     }
-    public double getEmployeeSalarySum (int depatment){
+    public double getEmployeeSalarySum (int department){
         return employeeService.getAll().stream()
-                .filter(e -> e.getDepartment() == depatment)
+                .filter(e -> e.getDepartment() == department)
                 .mapToDouble(Employee::getSalary)
                 .sum();
     }
