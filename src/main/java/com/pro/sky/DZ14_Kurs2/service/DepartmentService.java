@@ -33,7 +33,7 @@ public class DepartmentService {
 
     public List<Employee> getAll (int department){
         return employeeService.getAll().stream()
-                .filter(employee -> employee.getDepartment() == department)
+                .filter(e -> e.getDepartment() == department)
                 .collect(Collectors.toList());
 
     }
@@ -46,8 +46,7 @@ public class DepartmentService {
         return employeeService.getAll().stream()
                 .filter(e -> e.getDepartment() == depatment)
                 .mapToDouble(Employee::getSalary)
-                .max()
-                .orElseThrow(EmployeeNotFoundException::new);
+                .sum();
     }
 }
 
