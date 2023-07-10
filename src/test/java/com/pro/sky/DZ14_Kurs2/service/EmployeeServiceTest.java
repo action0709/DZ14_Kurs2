@@ -13,10 +13,10 @@ public class EmployeeServiceTest {
     EmployeeService employeeService = new EmployeeService();
 
     @Test
-    void whenFullThenTrowException(){
+    void whenFullThenTrowException() {
         for (int i = 0; i < 5; i++) {
             char additionalChar = (char) ('a' + i);
-            Employee employee = new Employee("name"+additionalChar, "sec_name", 1, 1);
+            Employee employee = new Employee("name" + additionalChar, "sec_name", 1, 1);
             employeeService.add(employee);
         }
 
@@ -25,26 +25,28 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    void whenNotUniqThenThrowException(){
+    void whenNotUniqThenThrowException() {
         Employee employee = new Employee("name", "lastname", 1, 1);
         employeeService.add(employee);
         assertThrows(EmployeeAlreadyAddedException.class, () -> employeeService.add(employee));
     }
+
     @Test
-    void addPositive(){
+    void addPositive() {
         Employee employee = new Employee("name", "last_name", 1, 1);
         employeeService.add(employee);
         assertTrue(employeeService.getAll().contains(employee));
     }
 
     @Test
-void findPositive() {
+    void findPositive() {
         Employee employee = new Employee("name", "last_name", 1, 1);
         employeeService.add(employee);
         Employee actual = employeeService.find("name", "last_name");
         assertNotNull(actual);
         assertEquals(employee, actual);
     }
+
     @Test
     void findNegative() {
         Employee employee = new Employee("name", "last_name", 1, 1);
@@ -53,10 +55,18 @@ void findPositive() {
     }
 
     @Test
-    void removePositive(){
+    void removePositive() {
         Employee employee = new Employee("name", "last_name", 1, 1);
         employeeService.add(employee);
         employeeService.remove("name", "last_name");
         assertFalse(employeeService.getAll().contains(employee));
+    }
+
+    @Test
+    void removeNegative() {
+        Employee employee = new Employee("name", "last_name", 1, 1);
+        employeeService.add(employee);
+        Employee actual = employeeService.remove("not_name", "not_last_name");
+        assertNull(actual);
     }
 }
