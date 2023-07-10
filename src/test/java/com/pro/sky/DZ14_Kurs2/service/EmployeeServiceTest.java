@@ -1,6 +1,7 @@
 package com.pro.sky.DZ14_Kurs2.service;
 
 import com.pro.sky.DZ14_Kurs2.exception.EmployeeAlreadyAddedException;
+import com.pro.sky.DZ14_Kurs2.exception.EmployeeNotFoundException;
 import com.pro.sky.DZ14_Kurs2.exception.EmployeeStorageIsFullException;
 import com.pro.sky.DZ14_Kurs2.model.Employee;
 import org.junit.jupiter.api.Assertions;
@@ -34,5 +35,20 @@ public class EmployeeServiceTest {
         Employee employee = new Employee("name", "last_name", 1, 1);
         employeeService.add(employee);
         assertTrue(employeeService.getAll().contains(employee));
+    }
+
+    @Test
+void findPositive() {
+        Employee employee = new Employee("name", "last_name", 1, 1);
+        employeeService.add(employee);
+        Employee actual = employeeService.find("name", "last_name");
+        assertNotNull(actual);
+        assertEquals(employee, actual);
+    }
+    @Test
+    void findNegative() {
+        Employee employee = new Employee("name", "last_name", 1, 1);
+        employeeService.add(employee);
+        assertThrows(EmployeeNotFoundException.class, () -> employeeService.find("not_name", "not_last_name"));
     }
 }
