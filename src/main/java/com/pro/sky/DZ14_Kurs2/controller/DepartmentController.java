@@ -37,4 +37,9 @@ public class DepartmentController {
     private Map<Integer,List<Employee>> getAll() {
         return departmentService.getAll();
     }
+
+    @GetMapping("/depatment-salary")
+    public double getEmployeeDepartmentSalary  (@RequestParam("departmentId")int department){
+        return  departmentService.getEmployeeSalarySum(department);
+    }
 }

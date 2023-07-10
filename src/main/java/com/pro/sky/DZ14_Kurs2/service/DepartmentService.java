@@ -42,6 +42,13 @@ public class DepartmentService {
         return employeeService.getAll().stream()
                 .collect(Collectors.groupingBy(Employee::getDepartment));
     }
+    public double getEmployeeSalarySum (int depatment){
+        return employeeService.getAll().stream()
+                .filter(e -> e.getDepartment() == depatment)
+                .mapToDouble(Employee::getSalary)
+                .max()
+                .orElseThrow(EmployeeNotFoundException::new);
+    }
 }
 
 
